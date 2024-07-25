@@ -36,8 +36,8 @@ export function Footer() {
     <footer className={styles.wrapper}>
       <div className={clsx("container", styles.inner)}>
         <nav className={styles.navigation}>
-          {menu.map((items) => (
-            <ul className={styles["navigation-list"]}>
+          {menu.map((items, index) => (
+            <ul className={styles["navigation-list"]} key={index}>
               {items.map((item) => (
                 <li className={styles["navigation-item"]} key={item.label}>
                   <a className={styles["navigation-link"]} href={item.href}>

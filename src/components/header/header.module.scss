@@ -42,6 +42,7 @@
 }
 
 .navigation-link {
+  display: block;
   color: #0b1524;
   transition: color 0.2s;
 
@@ -84,6 +85,7 @@
 
   img {
     border-radius: 50%;
+    overflow: hidden;
   }
 
   span {
