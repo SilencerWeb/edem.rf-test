@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import clsx from "clsx";
 
 import photo from "./images/photo.jpg";
@@ -41,33 +42,31 @@ export function Card({ className, title, city, date, types, price }) {
           <Box />
           <p className={styles["types-list"]}>
             <span>Тип груза: </span>
-            <span>
-              {typesToRender.map((type, index) => {
-                const isLast = index + 1 === MAX_AMOUNT_OF_TYPES_TO_RENDER;
+            {typesToRender.map((type, index) => {
+              const isLast = index === typesToRender.length - 1;
 
-                return (
-                  <span key={type}>
-                    {type}
-                    {!isLast && ", "}
-                  </span>
-                );
-              })}
-            </span>
+              return (
+                <Fragment key={type}>
+                  {type}
+                  {!isLast && ", "}
+                </Fragment>
+              );
+            })}
             {typesToShowInTooltip.length > 0 && (
-              <span>
+              <>
                 {" "}
                 и{" "}
                 <span className={styles["types-more"]}>
                   еще {typesToShowInTooltip.length} типов
                 </span>
-              </span>
+              </>
             )}
           </p>
         </div>
       </div>
       <div className={styles.price}>
         <span className={styles["price-period"]}>за 1 час</span>
-        <span className={styles["price-value"]}>от {price} ₽</span>
+        <span className={styles["price-value"]}>от {price} ₽</span>
       </div>
     </div>
   );

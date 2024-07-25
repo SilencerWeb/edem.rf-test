@@ -13,8 +13,16 @@ export function Header() {
     <header className={styles.wrapper}>
       <div className={clsx("container", styles.inner)}>
         <div className={styles.logo}>
-          <img src={logo} alt="" />
-          <span>Выгодные междугородние поездки и перевозки</span>
+          <a href="/">
+            <img
+              width="164"
+              height="40"
+              src={logo}
+              loading="eager"
+              alt="Едем.рф"
+            />
+          </a>
+          <span>Лучший способ путешествовать дешевле</span>
         </div>
         <ul className={styles.navigation}>
           <li className={styles["navigation-item"]}>

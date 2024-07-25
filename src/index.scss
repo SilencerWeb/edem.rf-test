@@ -4,6 +4,8 @@ body {
   font-family: "Roboto Flex", sans-serif;
   color: #0b1524;
   background-color: #f2f3f4;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
