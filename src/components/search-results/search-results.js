@@ -48,7 +48,7 @@ export function SearchResults() {
                 />
               ))}
             </div>
-            {!isLoading && data.items.length < data.count && (
+            {data.items.length < data.count && !isLoading && (
               <LoadMore onTrigger={handleLoadMoreTrigger} />
             )}
           </>

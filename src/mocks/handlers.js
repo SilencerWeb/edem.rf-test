@@ -23,11 +23,20 @@ function generateItems(amount) {
   }));
 }
 
+const MAX_COUNT = 103;
 let currentCount = 0;
+
 export const handlers = [
   http.get("/items", async ({ request }) => {
     const url = new URL(request.url);
     const amount = currentCount === 100 ? 3 : +url.searchParams.get("amount");
+
+    if (currentCount >= MAX_COUNT) {
+      return HttpResponse.json({
+        items: [],
+        count: MAX_COUNT,
+      });
+    }
 
     if (amount === 30) currentCount = 0;
     currentCount += amount;
@@ -36,7 +45,7 @@ export const handlers = [
 
     return HttpResponse.json({
       items: generateItems(amount),
-      count: 103,
+      count: MAX_COUNT,
     });
   }),
 ];
