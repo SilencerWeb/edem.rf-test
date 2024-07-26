@@ -9,8 +9,6 @@ import { LoadMore } from "./load-more";
 
 import styles from "./search-results.module.scss";
 
-const MAX_ITEMS_AMOUNT = 103;
-
 export function SearchResults() {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector((state) => state.items);
@@ -21,32 +19,24 @@ export function SearchResults() {
   }, [dispatch]);
 
   const handleLoadMoreTrigger = () => {
-    if (data.length >= MAX_ITEMS_AMOUNT) {
-      return alert("Поездок больше не найдено");
-    }
-
-    if (data.length === MAX_ITEMS_AMOUNT - 3) {
-      return dispatch(fetchItems(3));
-    }
-
     return dispatch(fetchItems(10));
   };
 
   return (
     <div className={styles.wrapper}>
       <div className="container">
-        {data.length > 0 && (
+        {data.items.length > 0 && (
           <>
             <h2 className={styles.title}>
               Найдено:{" "}
-              {pluralize(data.length, [
+              {pluralize(data.items.length, [
                 "грузоперевозка",
                 "грузоперевозки",
                 "грузоперевозок",
               ])}
             </h2>
             <div className={styles.content}>
-              {data.map(({ id, name, city, date, types, price }) => (
+              {data.items.map(({ id, name, city, date, types, price }) => (
                 <Card
                   className={styles.item}
                   name={name}
@@ -58,7 +48,9 @@ export function SearchResults() {
                 />
               ))}
             </div>
-            {!isLoading && <LoadMore onTrigger={handleLoadMoreTrigger} />}
+            {!isLoading && data.items.length < data.count && (
+              <LoadMore onTrigger={handleLoadMoreTrigger} />
+            )}
           </>
         )}
         {isLoading && <p className={styles.loading}>Ищем грузоперевозки...</p>}

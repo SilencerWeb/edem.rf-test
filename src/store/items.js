@@ -16,7 +16,7 @@ export const fetchItems = createAsyncThunk(
 
 export const items = createSlice({
   name: "items",
-  initialState: { data: [], isLoading: false },
+  initialState: { data: { items: [], count: null }, isLoading: false },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -26,10 +26,17 @@ export const items = createSlice({
       .addCase(fetchItems.fulfilled, (state, action) => {
         state.isLoading = false;
 
-        if (state.data.length === 0) {
-          state.data = action.payload.items;
+        if (state.data.items.length === 0) {
+          state.data = action.payload;
         } else {
-          state.data.push(...action.payload.items);
+          state.data.items.push(...action.payload.items);
+          state.data.count = action.payload.count;
+        }
+
+        if (state.data.items.length === state.data.count) {
+          setTimeout(() => {
+            alert("Поездок больше не найдено");
+          });
         }
       });
   },

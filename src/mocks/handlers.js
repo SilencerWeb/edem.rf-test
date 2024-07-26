@@ -23,15 +23,20 @@ function generateItems(amount) {
   }));
 }
 
+let currentCount = 0;
 export const handlers = [
   http.get("/items", async ({ request }) => {
     const url = new URL(request.url);
-    const amount = url.searchParams.get("amount");
+    const amount = currentCount === 100 ? 3 : +url.searchParams.get("amount");
+
+    if (amount === 30) currentCount = 0;
+    currentCount += amount;
 
     await delay(1500);
 
     return HttpResponse.json({
       items: generateItems(amount),
+      count: 103,
     });
   }),
 ];
