@@ -1,10 +1,10 @@
+import { http, delay, HttpResponse } from "msw";
 import { fakerRU as faker } from "@faker-js/faker";
-import { http, HttpResponse } from "msw";
 
 function generateItems(amount) {
   return Array.from({ length: amount }, () => ({
     id: faker.string.uuid(),
-    name: faker.person.fullName(),
+    name: faker.company.name(),
     city: faker.location.city(),
     date: faker.date.anytime(),
     types: faker.helpers.arrayElements([
@@ -24,10 +24,14 @@ function generateItems(amount) {
 }
 
 export const handlers = [
-  http.get("/items", () => {
+  http.get("/items", async ({ request }) => {
+    const url = new URL(request.url);
+    const amount = url.searchParams.get("amount");
+
+    await delay(1500);
+
     return HttpResponse.json({
-      amount: 30,
-      items: generateItems(30),
+      items: generateItems(amount),
     });
   }),
 ];
