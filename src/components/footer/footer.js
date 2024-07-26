@@ -2,7 +2,6 @@ import clsx from "clsx";
 
 import { ReactComponent as AppStore } from "./images/app-store.svg";
 import { ReactComponent as GooglePlay } from "./images/google-play.svg";
-
 import { ReactComponent as Vkontakte } from "./images/vkontakte.svg";
 import { ReactComponent as Odnoklassniki } from "./images/odnoklassniki.svg";
 import { ReactComponent as Telegram } from "./images/telegram.svg";

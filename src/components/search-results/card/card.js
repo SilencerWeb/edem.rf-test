@@ -1,13 +1,14 @@
 import { Fragment } from "react";
 import clsx from "clsx";
 
+import { pluralize } from "utils/pluralize";
+
 import photo from "./images/photo.jpg";
 import photo2x from "./images/photo@2x.jpg";
 import { ReactComponent as MapMarker } from "./images/map-marker.svg";
 import { ReactComponent as Box } from "./images/box.svg";
 
 import styles from "./card.module.scss";
-import { pluralize } from "../../../utils/pluralize";
 
 const MAX_AMOUNT_OF_TYPES_TO_RENDER = 3;
 

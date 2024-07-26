@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { fetchItems } from "../../store/items";
-import { pluralize } from "../../utils/pluralize";
+import { fetchItems } from "store/items";
+import { pluralize } from "utils/pluralize";
+
 import { Card } from "./card";
 import { LoadMore } from "./load-more";
+
 import styles from "./search-results.module.scss";
 
 const MAX_ITEMS_AMOUNT = 103;
