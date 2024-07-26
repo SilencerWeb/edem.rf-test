@@ -10,7 +10,7 @@ import styles from "./card.module.scss";
 
 const MAX_AMOUNT_OF_TYPES_TO_RENDER = 3;
 
-export function Card({ className, title, city, date, types, price }) {
+export function Card({ className, name, city, date, types, price }) {
   const typesToRender = types.slice(0, MAX_AMOUNT_OF_TYPES_TO_RENDER);
   const typesToShowInTooltip = types.slice(MAX_AMOUNT_OF_TYPES_TO_RENDER);
 
@@ -23,15 +23,15 @@ export function Card({ className, title, city, date, types, price }) {
         src={photo}
         srcSet={`${photo2x} 2x`}
         loading="lazy"
-        alt={title}
+        alt={name}
       />
       <div className={styles.content}>
-        <h2 className={styles.title}>{title}</h2>
+        <h2 className={styles.name}>{name}</h2>
         <span className={styles.information}>
           <MapMarker />
           <span>{city}</span>
           <time>
-            {date.toLocaleDateString("ru-RU", {
+            {new Date(date).toLocaleDateString("ru-RU", {
               weekday: "short",
               month: "short",
               day: "numeric",

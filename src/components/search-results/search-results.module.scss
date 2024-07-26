@@ -22,3 +22,14 @@
     margin-top: 0;
   }
 }
+
+.loading {
+  font-size: 20px;
+  text-align: center;
+  margin-top: 24px;
+  margin-bottom: 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
