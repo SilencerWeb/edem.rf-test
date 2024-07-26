@@ -7,6 +7,7 @@ import { ReactComponent as MapMarker } from "./images/map-marker.svg";
 import { ReactComponent as Box } from "./images/box.svg";
 
 import styles from "./card.module.scss";
+import { pluralize } from "../../../utils/pluralize";
 
 const MAX_AMOUNT_OF_TYPES_TO_RENDER = 3;
 
@@ -57,7 +58,12 @@ export function Card({ className, name, city, date, types, price }) {
                 {" "}
                 и{" "}
                 <span className={styles["types-more"]}>
-                  еще {typesToShowInTooltip.length} типов
+                  еще{" "}
+                  {pluralize(typesToShowInTooltip.length, [
+                    "тип",
+                    "типа",
+                    "типов",
+                  ])}
                 </span>
               </>
             )}

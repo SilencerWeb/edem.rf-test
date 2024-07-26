@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { fetchItems } from "../../store/items";
+import { pluralize } from "../../utils/pluralize";
 import { Card } from "./card";
 import { LoadMore } from "./load-more";
 import styles from "./search-results.module.scss";
@@ -31,7 +32,12 @@ export function SearchResults() {
         {data.length > 0 && (
           <>
             <h2 className={styles.title}>
-              Найдено: {data.length} грузоперевозка
+              Найдено:{" "}
+              {pluralize(data.length, [
+                "грузоперевозка",
+                "грузоперевозки",
+                "грузоперевозок",
+              ])}
             </h2>
             <div className={styles.content}>
               {data.map(({ id, name, city, date, types, price }) => (
