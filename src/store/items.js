@@ -16,7 +16,7 @@ export const fetchItems = createAsyncThunk(
 
 export const items = createSlice({
   name: "items",
-  initialState: { data: [], isLoading: false, error: null },
+  initialState: { data: [], isLoading: false },
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -25,7 +25,6 @@ export const items = createSlice({
       })
       .addCase(fetchItems.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.error = null;
 
         if (state.data.length === 0) {
           state.data = action.payload.items;
