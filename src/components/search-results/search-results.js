@@ -21,11 +21,15 @@ export function SearchResults() {
   }, [dispatch]);
 
   const handleLoadMoreTrigger = () => {
-    if (data.length === MAX_ITEMS_AMOUNT - 3) {
-      dispatch(fetchItems(3));
-    } else {
-      dispatch(fetchItems(10));
+    if (data.length >= MAX_ITEMS_AMOUNT) {
+      return alert("Поездок больше не найдено");
     }
+
+    if (data.length === MAX_ITEMS_AMOUNT - 3) {
+      return dispatch(fetchItems(3));
+    }
+
+    return dispatch(fetchItems(10));
   };
 
   return (
@@ -54,9 +58,7 @@ export function SearchResults() {
                 />
               ))}
             </div>
-            {data.length < MAX_ITEMS_AMOUNT && (
-              <LoadMore onTrigger={handleLoadMoreTrigger} />
-            )}
+            {!isLoading && <LoadMore onTrigger={handleLoadMoreTrigger} />}
           </>
         )}
         {isLoading && <p className={styles.loading}>Ищем грузоперевозки...</p>}
