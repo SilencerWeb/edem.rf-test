@@ -13,7 +13,7 @@ export function LoadMore({ onTrigger }) {
     if (intersection?.isIntersecting) {
       onTrigger();
     }
-  }, [intersection?.isIntersecting]);
+  }, [intersection?.isIntersecting, onTrigger]);
 
   return <div ref={ref}></div>;
 }

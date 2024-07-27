@@ -2,12 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchItems = createAsyncThunk(
   "items/fetchItems",
-  async (amount, thunkAPI) => {
+  async ({ offset, limit }, { signal }) => {
     const response = await fetch(
-      `http://localhost:3000/items?amount=${amount}`,
-      {
-        signal: thunkAPI.signal,
-      }
+      `http://localhost:3000/items?offset=${offset}&limit=${limit}`,
+      { signal }
     );
     const jsonData = await response.json();
     return jsonData;
