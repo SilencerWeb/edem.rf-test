@@ -1,7 +1,6 @@
-import { useState, useEffect, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState, useCallback } from "react";
 
-import { fetchItems } from "store/items";
+import { useGetItemsQuery } from "store/items";
 import { pluralize } from "utils/pluralize";
 
 import { Card } from "./card";
@@ -37,61 +36,55 @@ function getFetchItemsOptions(currentPage) {
 }
 
 export function SearchResults() {
-  const dispatch = useDispatch();
-  const { data, isLoading } = useSelector((state) => state.items);
-
   const [currentPage, setCurrentPage] = useState(0);
-  const totalPages = calculateTotalPagesCount(data.count);
 
-  useEffect(() => {
-    const promise = dispatch(
-      fetchItems({
-        offset: 0,
-        limit: 30,
-      })
-    );
-
-    return () => promise.abort();
-  }, [dispatch]);
+  const { data, isLoading, isFetching } = useGetItemsQuery(
+    getFetchItemsOptions(currentPage)
+  );
 
   const handleLoadMoreTrigger = useCallback(() => {
-    const newCurrentPage = currentPage + 1;
-    dispatch(fetchItems(getFetchItemsOptions(newCurrentPage)));
-    setCurrentPage(newCurrentPage);
-  }, [currentPage, dispatch]);
+    setCurrentPage((currentPage) => currentPage + 1);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className={styles.wrapper}>
+        <div className="container"></div>
+        <p className={styles.loading}>Ищем грузоперевозки...</p>
+      </div>
+    );
+  }
+
+  const totalPages = calculateTotalPagesCount(data.count);
 
   return (
     <div className={styles.wrapper}>
       <div className="container">
-        {data.items.length > 0 && (
-          <>
-            <h2 className={styles.title}>
-              Найдено:{" "}
-              {pluralize(data.items.length, [
-                "грузоперевозка",
-                "грузоперевозки",
-                "грузоперевозок",
-              ])}
-            </h2>
-            <div className={styles.content}>
-              {data.items.map(({ id, name, city, date, types, price }) => (
-                <Card
-                  className={styles.item}
-                  name={name}
-                  city={city}
-                  date={date}
-                  types={types}
-                  price={price}
-                  key={id}
-                />
-              ))}
-            </div>
-            {currentPage < totalPages && !isLoading && (
-              <LoadMore onTrigger={handleLoadMoreTrigger} />
-            )}
-          </>
+        <h2 className={styles.title}>
+          Найдено:{" "}
+          {pluralize(data.items.length, [
+            "грузоперевозка",
+            "грузоперевозки",
+            "грузоперевозок",
+          ])}
+        </h2>
+        <div className={styles.content}>
+          {data.items.map(({ id, name, city, date, types, price }) => (
+            <Card
+              className={styles.item}
+              name={name}
+              city={city}
+              date={date}
+              types={types}
+              price={price}
+              key={id}
+            />
+          ))}
+        </div>
+        {isFetching && <p className={styles.loading}>Ищем грузоперевозки...</p>}
+        {currentPage < totalPages && !isFetching && (
+          <LoadMore onTrigger={handleLoadMoreTrigger} />
         )}
-        {isLoading && <p className={styles.loading}>Ищем грузоперевозки...</p>}
       </div>
     </div>
   );
