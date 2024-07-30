@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Item } from 'types';
+
+import type { Item } from 'types';
 
 export const itemsApi = createApi({
   reducerPath: 'itemsApi',
@@ -15,14 +16,15 @@ export const itemsApi = createApi({
         return currentArg?.offset !== previousArg?.offset || currentArg?.limit !== previousArg?.limit;
       },
       onQueryStarted: async (args, { queryFulfilled }) => {
-        try {
-          const { data } = await queryFulfilled;
-          if (args.offset + args.limit >= data.count) {
-            setTimeout(() => {
-              alert('Поездок больше не найдено');
-            });
-          }
-        } catch (err) {}
+        queryFulfilled
+          .then(({ data }) => {
+            if (args.offset + args.limit >= data.count) {
+              setTimeout(() => {
+                alert('Поездок больше не найдено');
+              });
+            }
+          })
+          .catch(() => null);
       },
     }),
   }),

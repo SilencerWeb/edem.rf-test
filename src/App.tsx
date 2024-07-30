@@ -1,6 +1,6 @@
-import { Header } from './components/header';
-import { Footer } from './components/footer';
-import { SearchResults } from './components/search-results';
+import { Footer } from 'components/footer';
+import { Header } from 'components/header';
+import { SearchResults } from 'components/search-results';
 
 import styles from './App.module.scss';
 

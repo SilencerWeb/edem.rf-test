@@ -1,13 +1,13 @@
+import { clsx } from 'clsx';
 import { Fragment } from 'react';
-import clsx from 'clsx';
 
+import type { Item } from 'types';
 import { pluralize } from 'utils/pluralize';
-import { Item } from 'types';
 
+import { ReactComponent as Box } from './images/box.svg';
+import { ReactComponent as MapMarker } from './images/map-marker.svg';
 import photo from './images/photo.jpg';
 import photo2x from './images/photo@2x.jpg';
-import { ReactComponent as MapMarker } from './images/map-marker.svg';
-import { ReactComponent as Box } from './images/box.svg';
 
 import styles from './card.module.scss';
 
@@ -78,7 +78,7 @@ export function Card({
       </div>
       <div className={styles.price}>
         <span className={styles['price-period']}>за 1 час</span>
-        <span className={styles['price-value']}>от {price} ₽</span>
+        <span className={styles['price-value']}>от {price}₽</span>
       </div>
     </div>
   );

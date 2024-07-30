@@ -1,10 +1,10 @@
-import clsx from 'clsx';
+import { clsx } from 'clsx';
 
-import logo from './images/logo.svg';
-import { ReactComponent as SpeechBubble } from './images/speech-bubble.svg';
-import { ReactComponent as Bell } from './images/bell.svg';
 import avatar from './images/avatar.jpg';
 import avatar2x from './images/avatar@2x.jpg';
+import { ReactComponent as Bell } from './images/bell.svg';
+import logo from './images/logo.svg';
+import { ReactComponent as SpeechBubble } from './images/speech-bubble.svg';
 
 import styles from './header.module.scss';
 

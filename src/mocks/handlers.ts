@@ -1,5 +1,5 @@
-import { http, delay, HttpResponse } from 'msw';
 import { fakerRU as faker } from '@faker-js/faker';
+import { http, delay, HttpResponse } from 'msw';
 
 const database = Array.from({ length: 103 }, () => ({
   id: faker.string.uuid(),
