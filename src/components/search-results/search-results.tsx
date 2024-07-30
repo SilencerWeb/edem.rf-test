@@ -1,12 +1,12 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
-import { useGetItemsQuery } from "store/items";
-import { pluralize } from "utils/pluralize";
+import { useGetItemsQuery } from 'store/items';
+import { pluralize } from 'utils/pluralize';
 
-import { Card } from "./card";
-import { LoadMore } from "./load-more";
+import { Card } from './card';
+import { LoadMore } from './load-more';
 
-import styles from "./search-results.module.scss";
+import styles from './search-results.module.scss';
 
 const FIRST_PAGE_ITEMS_AMOUNT = 30;
 const OTHER_PAGES_ITEMS_AMOUNT = 10;
@@ -14,7 +14,7 @@ const OTHER_PAGES_ITEMS_AMOUNT = 10;
 function calculateTotalPagesCount(itemsCount: number) {
   return Math.floor(
     // We are adding 1 since we skip the first page by subtracting FIRST_PAGE_ITEMS_AMOUNT
-    (itemsCount - FIRST_PAGE_ITEMS_AMOUNT) / OTHER_PAGES_ITEMS_AMOUNT + 1
+    (itemsCount - FIRST_PAGE_ITEMS_AMOUNT) / OTHER_PAGES_ITEMS_AMOUNT + 1,
   );
 }
 
@@ -27,10 +27,7 @@ function getFetchItemsOptions(currentPage: number) {
   }
 
   return {
-    offset:
-      FIRST_PAGE_ITEMS_AMOUNT +
-      currentPage * OTHER_PAGES_ITEMS_AMOUNT -
-      OTHER_PAGES_ITEMS_AMOUNT,
+    offset: FIRST_PAGE_ITEMS_AMOUNT + currentPage * OTHER_PAGES_ITEMS_AMOUNT - OTHER_PAGES_ITEMS_AMOUNT,
     limit: OTHER_PAGES_ITEMS_AMOUNT,
   };
 }
@@ -38,9 +35,7 @@ function getFetchItemsOptions(currentPage: number) {
 export function SearchResults() {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const { data, isLoading, isFetching } = useGetItemsQuery(
-    getFetchItemsOptions(currentPage)
-  );
+  const { data, isLoading, isFetching } = useGetItemsQuery(getFetchItemsOptions(currentPage));
 
   const handleLoadMoreTrigger = useCallback(() => {
     setCurrentPage((currentPage) => currentPage + 1);
@@ -63,12 +58,7 @@ export function SearchResults() {
     <div className={styles.wrapper}>
       <div className="container">
         <h2 className={styles.title}>
-          Найдено:{" "}
-          {pluralize(data.items.length, [
-            "грузоперевозка",
-            "грузоперевозки",
-            "грузоперевозок",
-          ])}
+          Найдено: {pluralize(data.items.length, ['грузоперевозка', 'грузоперевозки', 'грузоперевозок'])}
         </h2>
         <div className={styles.content}>
           {data.items.map(({ id, name, city, date, types, price }) => (
@@ -84,9 +74,7 @@ export function SearchResults() {
           ))}
         </div>
         {isFetching && <p className={styles.loading}>Ищем грузоперевозки...</p>}
-        {currentPage < totalPages && !isFetching && (
-          <LoadMore onTrigger={handleLoadMoreTrigger} />
-        )}
+        {currentPage < totalPages && !isFetching && <LoadMore onTrigger={handleLoadMoreTrigger} />}
       </div>
     </div>
   );

@@ -1,17 +1,17 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 
-import logo from "./images/logo.svg";
-import { ReactComponent as SpeechBubble } from "./images/speech-bubble.svg";
-import { ReactComponent as Bell } from "./images/bell.svg";
-import avatar from "./images/avatar.jpg";
-import avatar2x from "./images/avatar@2x.jpg";
+import logo from './images/logo.svg';
+import { ReactComponent as SpeechBubble } from './images/speech-bubble.svg';
+import { ReactComponent as Bell } from './images/bell.svg';
+import avatar from './images/avatar.jpg';
+import avatar2x from './images/avatar@2x.jpg';
 
-import styles from "./header.module.scss";
+import styles from './header.module.scss';
 
 export function Header() {
   return (
     <header className={styles.wrapper}>
-      <div className={clsx("container", styles.inner)}>
+      <div className={clsx('container', styles.inner)}>
         <div className={styles.logo}>
           <a href="/">
             <img
@@ -25,29 +25,26 @@ export function Header() {
           <span>Лучший способ путешествовать дешевле</span>
         </div>
         <ul className={styles.navigation}>
-          <li className={styles["navigation-item"]}>
-            <a className={styles["navigation-link"]} href="/chat">
+          <li className={styles['navigation-item']}>
+            <a
+              className={styles['navigation-link']}
+              href="/chat"
+            >
               <SpeechBubble />
             </a>
           </li>
-          <li className={styles["navigation-item"]}>
+          <li className={styles['navigation-item']}>
             <a
-              className={clsx(
-                styles["navigation-link"],
-                styles["navigation-notifications"]
-              )}
+              className={clsx(styles['navigation-link'], styles['navigation-notifications'])}
               href="/notifications"
             >
               <Bell />
               <span>54</span>
             </a>
           </li>
-          <li className={styles["navigation-item"]}>
+          <li className={styles['navigation-item']}>
             <a
-              className={clsx(
-                styles["navigation-link"],
-                styles["navigation-profile"]
-              )}
+              className={clsx(styles['navigation-link'], styles['navigation-profile'])}
               href="/profile"
             >
               <img

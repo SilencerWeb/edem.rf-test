@@ -1,5 +1,5 @@
-import { http, delay, HttpResponse } from "msw";
-import { fakerRU as faker } from "@faker-js/faker";
+import { http, delay, HttpResponse } from 'msw';
+import { fakerRU as faker } from '@faker-js/faker';
 
 const database = Array.from({ length: 103 }, () => ({
   id: faker.string.uuid(),
@@ -7,25 +7,25 @@ const database = Array.from({ length: 103 }, () => ({
   city: faker.location.city(),
   date: faker.date.anytime(),
   types: faker.helpers.arrayElements([
-    "Личные вещи",
-    "Стройматериалы",
-    "Техника и оборудование",
-    "Мебель и бытовая техника",
-    "Животные",
-    "Металлопрокат",
-    "Продукты питания",
-    "Транспорт",
-    "Сыпучие грузы",
-    "Другое",
+    'Личные вещи',
+    'Стройматериалы',
+    'Техника и оборудование',
+    'Мебель и бытовая техника',
+    'Животные',
+    'Металлопрокат',
+    'Продукты питания',
+    'Транспорт',
+    'Сыпучие грузы',
+    'Другое',
   ]),
   price: faker.number.int({ min: 500, max: 2000 }),
 }));
 
 export const handlers = [
-  http.get("/items", async ({ request }) => {
+  http.get('/items', async ({ request }) => {
     const url = new URL(request.url);
-    const offset = +url.searchParams.get("offset")!;
-    const limit = +url.searchParams.get("limit")! || 30;
+    const offset = +url.searchParams.get('offset')!;
+    const limit = +url.searchParams.get('limit')! || 30;
 
     await delay(1500);
 

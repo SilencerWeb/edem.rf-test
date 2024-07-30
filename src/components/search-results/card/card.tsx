@@ -1,15 +1,15 @@
-import { Fragment } from "react";
-import clsx from "clsx";
+import { Fragment } from 'react';
+import clsx from 'clsx';
 
-import { pluralize } from "utils/pluralize";
-import { Item } from "types";
+import { pluralize } from 'utils/pluralize';
+import { Item } from 'types';
 
-import photo from "./images/photo.jpg";
-import photo2x from "./images/photo@2x.jpg";
-import { ReactComponent as MapMarker } from "./images/map-marker.svg";
-import { ReactComponent as Box } from "./images/box.svg";
+import photo from './images/photo.jpg';
+import photo2x from './images/photo@2x.jpg';
+import { ReactComponent as MapMarker } from './images/map-marker.svg';
+import { ReactComponent as Box } from './images/box.svg';
 
-import styles from "./card.module.scss";
+import styles from './card.module.scss';
 
 const MAX_AMOUNT_OF_TYPES_TO_RENDER = 3;
 
@@ -22,7 +22,7 @@ export function Card({
   price,
 }: {
   className?: string;
-} & Omit<Item, "id">) {
+} & Omit<Item, 'id'>) {
   const typesToRender = types.slice(0, MAX_AMOUNT_OF_TYPES_TO_RENDER);
   const typesToShowInTooltip = types.slice(MAX_AMOUNT_OF_TYPES_TO_RENDER);
 
@@ -43,16 +43,16 @@ export function Card({
           <MapMarker />
           <span>{city}</span>
           <time>
-            {new Date(date).toLocaleDateString("ru-RU", {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
+            {new Date(date).toLocaleDateString('ru-RU', {
+              weekday: 'short',
+              month: 'short',
+              day: 'numeric',
             })}
           </time>
         </span>
         <div className={styles.types}>
           <Box />
-          <p className={styles["types-list"]}>
+          <p className={styles['types-list']}>
             <span>Тип груза: </span>
             {typesToRender.map((type, index) => {
               const isLast = index === typesToRender.length - 1;
@@ -60,21 +60,16 @@ export function Card({
               return (
                 <Fragment key={type}>
                   {type}
-                  {!isLast && ", "}
+                  {!isLast && ', '}
                 </Fragment>
               );
             })}
             {typesToShowInTooltip.length > 0 && (
               <>
-                {" "}
-                и{" "}
-                <span className={styles["types-more"]}>
-                  еще{" "}
-                  {pluralize(typesToShowInTooltip.length, [
-                    "тип",
-                    "типа",
-                    "типов",
-                  ])}
+                {' '}
+                и{' '}
+                <span className={styles['types-more']}>
+                  еще {pluralize(typesToShowInTooltip.length, ['тип', 'типа', 'типов'])}
                 </span>
               </>
             )}
@@ -82,8 +77,8 @@ export function Card({
         </div>
       </div>
       <div className={styles.price}>
-        <span className={styles["price-period"]}>за 1 час</span>
-        <span className={styles["price-value"]}>от {price} ₽</span>
+        <span className={styles['price-period']}>за 1 час</span>
+        <span className={styles['price-value']}>от {price} ₽</span>
       </div>
     </div>
   );

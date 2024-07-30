@@ -1,8 +1,8 @@
-import { Header } from "./components/header";
-import { Footer } from "./components/footer";
-import { SearchResults } from "./components/search-results";
+import { Header } from './components/header';
+import { Footer } from './components/footer';
+import { SearchResults } from './components/search-results';
 
-import styles from "./App.module.scss";
+import styles from './App.module.scss';
 
 export function App() {
   return (
