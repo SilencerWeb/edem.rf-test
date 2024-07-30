@@ -35,17 +35,19 @@ function getFetchItemsOptions(currentPage: number) {
 export function SearchResults() {
   const [currentPage, setCurrentPage] = useState(0);
 
-  const { data, isLoading, isFetching } = useGetItemsQuery(getFetchItemsOptions(currentPage));
+  const { data, isLoading, isFetching, error } = useGetItemsQuery(getFetchItemsOptions(currentPage));
 
   const handleLoadMoreTrigger = useCallback(() => {
     setCurrentPage((currentPage) => currentPage + 1);
   }, []);
 
-  if (isLoading) {
+  if (isLoading || error) {
+    const message = isLoading ? 'Ищем грузоперевозки...' : 'Что-то пошло не так...';
+
     return (
       <div className={styles.wrapper}>
         <div className="container"></div>
-        <p className={styles.loading}>Ищем грузоперевозки...</p>
+        <p className={styles.placeholder}>{message}</p>
       </div>
     );
   }
@@ -73,7 +75,7 @@ export function SearchResults() {
             />
           ))}
         </div>
-        {isFetching && <p className={styles.loading}>Ищем грузоперевозки...</p>}
+        {isFetching && <p className={styles.placeholder}>Ищем грузоперевозки...</p>}
         {currentPage < totalPages && !isFetching && <LoadMore onTrigger={handleLoadMoreTrigger} />}
       </div>
     </div>
