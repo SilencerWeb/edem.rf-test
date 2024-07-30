@@ -1,10 +1,14 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { Item } from "types";
 
 export const itemsApi = createApi({
   reducerPath: "itemsApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3000" }),
   endpoints: (builder) => ({
-    getItems: builder.query({
+    getItems: builder.query<
+      { items: Item[]; count: number },
+      { offset: number; limit: number }
+    >({
       query: ({ offset, limit }) => `items?offset=${offset}&limit=${limit}`,
       serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (currentCache, newCache) => {

@@ -4,10 +4,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^2.2.6",
+    "@reduxjs/toolkit": "^2.2.7",
     "clsx": "^2.1.1",
     "normalize.css": "^8.0.1",
     "react": "^18.3.1",
@@ -19,6 +20,9 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
     "msw": "^2.3.4"
   },
   "eslintConfig": {

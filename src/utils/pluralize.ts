@@ -1,5 +1,5 @@
 // This function is taken from https://gist.github.com/znechai/1b25d0ee9a92e5b879175ab4f040dbbc
-export function pluralize(count, words) {
+export function pluralize(count: number, words: string[]) {
   const cases = [2, 0, 1, 1, 1, 2];
   const word =
     words[

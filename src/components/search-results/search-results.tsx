@@ -11,14 +11,14 @@ import styles from "./search-results.module.scss";
 const FIRST_PAGE_ITEMS_AMOUNT = 30;
 const OTHER_PAGES_ITEMS_AMOUNT = 10;
 
-function calculateTotalPagesCount(itemsCount) {
+function calculateTotalPagesCount(itemsCount: number) {
   return Math.floor(
     // We are adding 1 since we skip the first page by subtracting FIRST_PAGE_ITEMS_AMOUNT
     (itemsCount - FIRST_PAGE_ITEMS_AMOUNT) / OTHER_PAGES_ITEMS_AMOUNT + 1
   );
 }
 
-function getFetchItemsOptions(currentPage) {
+function getFetchItemsOptions(currentPage: number) {
   if (currentPage === 0) {
     return {
       offset: 0,
@@ -54,6 +54,8 @@ export function SearchResults() {
       </div>
     );
   }
+
+  if (!data) return null;
 
   const totalPages = calculateTotalPagesCount(data.count);
 

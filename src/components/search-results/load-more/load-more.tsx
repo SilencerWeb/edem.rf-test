@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
 
-export function LoadMore({ onTrigger }) {
+export function LoadMore({ onTrigger }: { onTrigger: () => void }) {
   const ref = useRef(null);
   const intersection = useIntersection(ref, {
     root: null,

@@ -2,6 +2,7 @@ import { Fragment } from "react";
 import clsx from "clsx";
 
 import { pluralize } from "utils/pluralize";
+import { Item } from "types";
 
 import photo from "./images/photo.jpg";
 import photo2x from "./images/photo@2x.jpg";
@@ -12,7 +13,16 @@ import styles from "./card.module.scss";
 
 const MAX_AMOUNT_OF_TYPES_TO_RENDER = 3;
 
-export function Card({ className, name, city, date, types, price }) {
+export function Card({
+  className,
+  name,
+  city,
+  date,
+  types,
+  price,
+}: {
+  className?: string;
+} & Omit<Item, "id">) {
   const typesToRender = types.slice(0, MAX_AMOUNT_OF_TYPES_TO_RENDER);
   const typesToShowInTooltip = types.slice(MAX_AMOUNT_OF_TYPES_TO_RENDER);
 

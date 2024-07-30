@@ -24,8 +24,8 @@ const database = Array.from({ length: 103 }, () => ({
 export const handlers = [
   http.get("/items", async ({ request }) => {
     const url = new URL(request.url);
-    const offset = +url.searchParams.get("offset");
-    const limit = +url.searchParams.get("limit");
+    const offset = +url.searchParams.get("offset")!;
+    const limit = +url.searchParams.get("limit")! || 30;
 
     await delay(1500);
 
